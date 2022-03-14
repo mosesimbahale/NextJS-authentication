@@ -1,9 +1,15 @@
-import NextAuth from "next-auth"
-import GoogleProvider from "next-auth/providers/google"
-import FacebookProvider from "next-auth/providers/facebook"
-import GithubProvider from "next-auth/providers/github"
-import TwitterProvider from "next-auth/providers/twitter"
-import Auth0Provider from "next-auth/providers/auth0"
+import NextAuth from "next-auth";
+import GoogleProvider from "next-auth/providers/google";
+import FacebookProvider from "next-auth/providers/facebook";
+import GithubProvider from "next-auth/providers/github";
+import TwitterProvider from "next-auth/providers/twitter";
+import Auth0Provider from "next-auth/providers/auth0";
+
+
+import { MongoDBAdapter } from "@next-auth/mongodb-adapter";
+import clientPromise from "/lib/mongodb";
+
+
 // import AppleProvider from "next-auth/providers/apple"
 // import EmailProvider from "next-auth/providers/email"
 
@@ -11,6 +17,9 @@ import Auth0Provider from "next-auth/providers/auth0"
 // https://next-auth.js.org/configuration/options
 export default NextAuth({
   // https://next-auth.js.org/configuration/providers/oauth
+
+  adapter: MongoDBAdapter(clientPromise),
+
   providers: [
     /* EmailProvider({
          server: process.env.EMAIL_SERVER,
